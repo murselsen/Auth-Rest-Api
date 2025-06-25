@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 dotenv.config();
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: "localhost",
   user: "auth",
   password: "murselsen",

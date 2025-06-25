@@ -18,18 +18,25 @@ const createToken = (userId) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ message: "Name, Username, Email and password are required." });
-  }
-  const [data] = await db.execute("SELECT * FROM users WHERE email = ?", [
-    email,
-  ]);
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Name, Username, Email and password are required.",
+      });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const [data] = await db.execute(
+      "SELECT * FROM users WHERE email = ? and password = ?",
+      [email, hashedPassword]
+    );
 
-  console.log("Data fetched from database:", data);
-  res.status(200).json({ message: "Data fetched successfully", data });
+    console.log("Data fetched from database:", data);
+    res.status(200).json({ message: "Data fetched successfully", data });
+  } catch (err) {
+    console.error("Error during login:", err);
+    res.status(500).json({ error: "Login failed", details: err.message });
+  }
 };
 
 export const register = async (req, res, next) => {
@@ -49,6 +56,8 @@ export const register = async (req, res, next) => {
     res.json({ insertCmd, result, token });
   } catch (err) {
     console.error("Error during registration:", err);
-    res.status(500).json({ error: "Kayıt başarısız", details: err.message });
+    res
+      .status(500)
+      .json({ error: "Registration failed", details: err.message });
   }
 };
