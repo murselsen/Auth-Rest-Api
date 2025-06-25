@@ -26,10 +26,12 @@ export const login = async (req, res) => {
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const [data] = await db.execute(
-      "SELECT * FROM users WHERE email = ? and password = ?",
-      [email, hashedPassword]
+    const selectUser = await db.execute(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
     );
+    console.log("Select User Query:", selectUser);
+    const [data] = selectUser;
 
     console.log("Data fetched from database:", data);
     res.status(200).json({ message: "Data fetched successfully", data });
