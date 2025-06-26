@@ -195,3 +195,4 @@ Proje ile ilgili sorularınız için issue açabilir veya e-posta gönderebilirs
 - [ ] E-posta doğrulama
 - [ ] Kullanıcı profil yönetimi
 - [ ] Rate limiting
+
