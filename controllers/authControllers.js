@@ -22,14 +22,13 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({
-        message: "Name, Username, Email and password are required.",
+        message: "Email and password are required.",
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const selectUser = await db.execute(
-      "SELECT * FROM users WHERE email = ?",
-      [email]
-    );
+    const selectUser = await db.execute("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
     console.log("Select User Query:", selectUser);
     const [data] = selectUser;
 
@@ -63,3 +62,5 @@ export const register = async (req, res, next) => {
       .json({ error: "Registration failed", details: err.message });
   }
 };
+
+
