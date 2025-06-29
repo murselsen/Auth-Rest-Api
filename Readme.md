@@ -1,5 +1,4 @@
-# Auth.murselsen.com
-
+# Auth Rest Api
 Bu proje, JWT tabanlı kullanıcı kimlik doğrulama sistemi sunan bir REST API'dir. Node.js, Express.js ve MySQL kullanılarak geliştirilmiştir.
 
 ## 🚀 Özellikler
