@@ -21,8 +21,8 @@ Bu proje, JWT tabanlı kullanıcı kimlik doğrulama sistemi sunan bir REST API'
 1. **Projeyi klonlayın:**
 
 ```bash
-git clone https://github.com/your-username/auth.murselsen.com.git
-cd auth.murselsen.com
+git clone https://github.com/your-username/auth.rest-api.git
+cd auth-rest-api
 ```
 
 2. **Bağımlılıkları yükleyin:**
